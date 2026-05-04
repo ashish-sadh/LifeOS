@@ -87,7 +87,8 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 ## New tasks discovered this loop (loop 14+)
 
 - [x] `examples/cooking/` is missing `sessions.md`, `vocabulary.md`, `context-snapshot.md` — added all three; cooking is the most accessible entry point for new users
-- [ ] `examples/fitness/`, `examples/thinking/`, `examples/speaking/`, `examples/writing/` — same gap: missing sessions.md, vocabulary.md, context-snapshot.md. Each example should be as complete as pole and cooking.
+- [x] `examples/fitness/` is missing `sessions.md`, `vocabulary.md`, `context-snapshot.md` — added all three; consistent with 2026-09-15 workout log dates
+- [ ] `examples/thinking/`, `examples/speaking/`, `examples/writing/` — same gap: missing sessions.md, vocabulary.md, context-snapshot.md. Each example should be as complete as pole, cooking, and fitness.
 
 ## New tasks discovered this loop
 
