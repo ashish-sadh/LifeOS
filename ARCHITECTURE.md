@@ -144,6 +144,9 @@ Skills (`.claude/skills/<name>/SKILL.md`) are reusable behaviors invoked by name
 | `coach-meta-review` | Quarterly: coach refines its own CLAUDE.md |
 | `spawn-coach` | Scaffold a new coach end-to-end |
 | `retire-coach` | Archive coach + remove alias |
+| `inbox-triage` | Route Inbox.md entries to their proper home (People, Places, Restaurants, Events, coach folders) |
+| `cross-domain-link` | Find missing wikilinks between related vault files across domains |
+| `coach-research` | Web-search for domain knowledge at the user's level; propose vocabulary, session topics, or program additions |
 
 ---
 
@@ -213,7 +216,7 @@ To keep the system fast even after years of use:
 | `sessions.md` | 60 entries (~30-60 KB) | Archive oldest quarter to `sessions/<quarter>.md` |
 | `vocabulary.md` | 25 entries | Split by category (`vocab/<category>.md`) |
 | Drive inbox/ per coach | 50 files | Daily-consolidate; consider Drive web cleanup |
-| Mac session-start file reads | 7 files (snapshot + 6 canonical) | Lazy-load — only read what conversation needs |
+| Mac session-start file reads | 2 bootstrap files (profile + snapshot) | Lazy-load deeper files only when conversation demands it |
 
 The `vault-maintain` skill enforces these budgets when invoked.
 
