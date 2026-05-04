@@ -12,7 +12,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 ## High Priority — example coaches
 
-- [ ] Fully populate `examples/cooking/` — add `CLAUDE.md`, `profile.md` template, and 2-3 sample recipe files showing the recipes/ folder pattern
+- [x] Fully populate `examples/cooking/` — add `CLAUDE.md`, `profile.md` template, and 2-3 sample recipe files showing the recipes/ folder pattern
 - [ ] Fully populate `examples/thinking/` — add `CLAUDE.md`, `profile.md` template, sample decision/model files
 - [ ] Add `examples/fitness/` — strength + mobility focus, distinct from pole
 - [ ] Add `examples/speaking/` — public speaking / communication coach with talks/ folder pattern
