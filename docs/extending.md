@@ -14,7 +14,7 @@ If a coach for your domain already exists in `examples/`:
 Or manually:
 
 ```bash
-cp -r ~/.GetBetterAt/examples/cooking $VAULT/Coaches/GetBetterAtCooking
+cp -r ~/workspace/LifeOS/examples/cooking $VAULT/Coaches/GetBetterAtCooking
 # Edit the files to add your specifics
 # Add the alias to ~/.zshrc:
 # alias cook='cd "$VAULT/Coaches/GetBetterAtCooking" && claude --dangerously-skip-permissions'
@@ -150,5 +150,5 @@ If your customization seems generally useful:
 
 1. Sanitize (remove personal data)
 2. Test on a fresh vault clone
-3. PR to https://github.com/ashish-sadh/GetBetterAt
+3. PR to https://github.com/ashish-sadh/LifeOS
 4. See `CONTRIBUTING.md` for conventions

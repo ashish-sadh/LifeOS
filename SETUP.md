@@ -14,15 +14,15 @@ How to set up your own GetBetterAt vault from scratch. Total time: ~30 minutes f
 ## Step 1 — Clone the framework
 
 ```bash
-git clone https://github.com/ashish-sadh/GetBetterAt.git ~/.GetBetterAt
+git clone https://github.com/ashish-sadh/LifeOS.git ~/workspace/LifeOS
 ```
 
-This puts the framework (skills, templates, scripts) in `~/.GetBetterAt`. Your *vault* will live separately at `~/Documents/Vault/` (or in Drive Desktop's folder).
+This puts the framework (skills, templates, scripts) in `~/workspace/LifeOS`. Your *vault* will live separately at `~/Documents/Vault/` (or in Drive Desktop's folder).
 
 ## Step 2 — Bootstrap your vault
 
 ```bash
-~/.GetBetterAt/scripts/bootstrap.sh
+~/workspace/LifeOS/scripts/bootstrap.sh
 ```
 
 The script will:
@@ -128,7 +128,7 @@ For visual editing and graph view:
 
 ### "permission denied" when running scripts
 ```bash
-chmod +x ~/.GetBetterAt/scripts/bootstrap.sh
+chmod +x ~/workspace/LifeOS/scripts/bootstrap.sh
 ```
 
 ### Shell aliases not loading
