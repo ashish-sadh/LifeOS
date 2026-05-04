@@ -31,7 +31,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 - [ ] Add `coach-research` skill that web-searches for new info in coach's domain and proposes additions
 - [x] Add `inbox-triage` skill — for processing Inbox.md (vault root) entries into proper homes
-- [ ] Add `cross-domain-link` skill — finds opportunities to wikilink between People/Places/Events/Restaurants/Coaches
+- [x] Add `cross-domain-link` skill — finds opportunities to wikilink between People/Places/Events/Restaurants/Coaches
 
 ## Medium Priority — AI surface recipes
 
