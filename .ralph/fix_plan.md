@@ -6,7 +6,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 - [x] Add a "Getting Started in 15 minutes" section near the top of README.md with a concrete first-coach walkthrough
 - [x] Add troubleshooting FAQ to SETUP.md (common Drive Desktop issues, connector permission errors, alias not loading, etc.)
-- [ ] Verify `scripts/bootstrap.sh` runs cleanly on a fresh Mac — read through carefully, check for assumptions about user's email, verify all paths use $VARS not hardcoded, ensure idempotency
+- [x] Verify `scripts/bootstrap.sh` runs cleanly on a fresh Mac — read through carefully, check for assumptions about user's email, verify all paths use $VARS not hardcoded, ensure idempotency
 - [ ] Make sure `SETUP_PHONE.md` has correct paste-ready prompts; verify file IDs are clearly labeled as "your IDs will differ"
 - [ ] Add a `CHANGELOG.md` documenting major architecture decisions (Vault → LifeOS rename, Drive Desktop adoption, etc.)
 
