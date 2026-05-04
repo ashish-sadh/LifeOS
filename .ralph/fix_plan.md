@@ -20,8 +20,8 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 ## Medium Priority — skills polish
 
-- [ ] Review each `skills/*/SKILL.md` for clarity. Fix any with vague triggers or missing edge cases
-- [ ] `vault-pull-inbox` skill: add explicit handling for when phone-written inbox files are malformed (missing sections, escaped markdown, etc.)
+- [x] Review each `skills/*/SKILL.md` for clarity. Fix any with vague triggers or missing edge cases
+- [x] `vault-pull-inbox` skill: add explicit handling for when phone-written inbox files are malformed (missing sections, escaped markdown, etc.)
 - [ ] `vault-push-snapshot` skill: clarify the snapshot template; ensure size cap (10 KB) is enforced
 - [ ] `coach-evolve` skill: add example output report so users know what to expect
 - [ ] `spawn-coach` skill: document the onboarding interview round structure per domain

@@ -49,7 +49,82 @@ User decides; you apply.
 
 ## File format expected (from phone Claude)
 
-Phone Claude writes inbox files in this format (per the snapshot's instructions). Be tolerant of minor format drift — phone may not always include every section.
+Phone Claude writes inbox files using the sections it knows from `context-snapshot.md`. The canonical format is:
+
+```markdown
+# Inbox — <coach-name> — <YYYY-MM-DDTHH-MM>
+
+## Session log entry
+<Free prose: what happened in this session. Date, key events, outcome.>
+
+## Vocabulary additions
+- **<term>**: <definition or note>
+- **<term>**: <definition>
+
+## Profile updates
+- <timestamped observation about the user's state, body, goals, or constraints>
+
+## Program adjustments
+- <any change to plan, progression, or schedule discussed>
+
+## Cross-coach observations
+- <anything relevant for another coach or the vault root>
+```
+
+Not all sections appear in every file. A session that was just Q&A might only have "Session log entry." A vocabulary-heavy session might have no profile updates. Both are valid.
+
+**Section detection**: look for `## <Section Name>` headers. Sections can appear in any order. Unknown section headers should be logged and skipped (don't discard the file).
+
+## Malformed file handling
+
+"Malformed" covers a range of severity. Apply this decision tree for each inbox file:
+
+### Level 1 — parseable but incomplete (most common)
+
+Symptom: File has some recognized sections but is missing others, or sections are present but empty.
+
+Action: **Apply what's there, skip what's missing.** Do not treat a missing section as an error. Log which sections were present. Normal outcome.
+
+### Level 2 — content garbled (phone keyboard artifacts)
+
+Symptom: Content is present but has escaped markdown characters (`\*`, `\[`, `\_`), smart quotes replacing code, or excess whitespace. Common on iOS with autocorrect.
+
+Action: **Strip common artifacts before parsing:**
+- Replace `\*` → `*`, `\[` → `[`, `\_` → `_`
+- Replace curly quotes (`"` `"` `'` `'`) with straight equivalents
+- Collapse runs of blank lines (3+ → 2)
+
+Then re-attempt parse at Level 1. If successful, note the cleanup in the summary to user: "Cleaned formatting artifacts from 2026-05-04T09-15-pole.md."
+
+### Level 3 — structure unrecognizable
+
+Symptom: No `## ` section headers found, or content is clearly not a vault inbox file (e.g., an accidental file creation, a blank file, a Drive sync temp file).
+
+Action: **Skip the file and surface to user:**
+
+> "Inbox file `2026-05-04T09-15-pole.md` couldn't be parsed — no recognizable sections. Skipped. Check it manually at Vault/Coaches/GetBetterAtPole/inbox/ if needed."
+
+Mark the file ID as processed (so it doesn't re-surface on every pull). Don't attempt to apply any content.
+
+### Level 4 — Drive read failure
+
+Symptom: `read_file_content` returns an error (permission denied, file not found, connector timeout).
+
+Action: **Do not mark as processed.** Log the failure:
+
+> "Could not read inbox file `<ID>` — Drive error: <error message>. Will retry next pull."
+
+Continue with remaining inbox files. If the same file fails 3 consecutive pulls, surface to user:
+
+> "Inbox file `<ID>` has failed to read 3 times. It may be corrupted or deleted. Remove it from the inbox folder or check Drive permissions."
+
+At that point, ask user whether to mark it as processed (skip permanently) or keep retrying.
+
+### Duplicate file IDs
+
+Symptom: The same file ID appears in the Drive listing twice (Drive sync artifact).
+
+Action: Process once, skip the duplicate. No error needed.
 
 ## State tracking
 
@@ -71,5 +146,5 @@ Phone Claude writes inbox files in this format (per the snapshot's instructions)
 
 - Don't process the same inbox file twice (use the ID list)
 - Don't delete inbox files from Drive (connector can't anyway)
-- Don't fail silently on parsing — if a phone file is malformed, surface it to user
+- Don't fail silently on parsing — follow the malformed file decision tree above; always tell the user what was skipped and why
 - Don't pull cross-coach (e.g., when running `pole`, only pull pole inbox)
