@@ -57,8 +57,8 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 - [ ] Add `shellcheck` lint comments in bash scripts
 - [ ] Run `bash -n` syntax check on all `.sh` files; fix any errors
-- [ ] Standardize markdown frontmatter across all coach `CLAUDE.md` files
-- [ ] Fix `.claude/scheduled/weekly-sun-10am-research.sh`: hardcoded email in LIFEOS path, uses `GetBetterAt/` instead of `Coaches/`, and doesn't use `$VAULT`. Update to match `coach-research` SKILL.md algorithm.
+- [x] Standardize reading protocols across all coach `CLAUDE.md` files — fixed eager pre-read anti-pattern (7 files → 2 bootstrap files + lazy-load) in all 6 examples and the template
+- [ ] Fix `.claude/scheduled/` scripts: all 4 scripts hardcode `asheesh.sadh@gmail.com` in the LIFEOS path. Must use `$VAULT` instead. Additionally, `daily-11pm-consolidate.sh`, `daily-08am-brief.sh`, and `weekly-sun-10am-research.sh` reference `GetBetterAt/` instead of `Coaches/`. Pattern: replace `LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"` with `if [ -z "${VAULT:-}" ]; then exit 1; fi; LIFEOS="$VAULT"` and update all `GetBetterAt/` references to `Coaches/`.
 
 ## Low Priority — community / contribution
 

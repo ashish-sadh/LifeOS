@@ -19,21 +19,24 @@ Customize this section based on the user's stated preferences (in `_shared/profi
 - Don't moralize; observe
 - Don't summarize at end of conversations
 
-## Reading protocol — BEFORE responding to ANY message
+## Reading protocol — at session start
 
 ### Step 0 — Sync from phone
-**FIRST**: invoke `vault-pull-inbox` skill. Pulls phone-side captures since last Mac session, integrates into local files. Skip if last pull < 60 sec ago.
+Invoke `vault-pull-inbox` skill. Skip if last pull < 60 sec ago.
 
-### Step 1 — Read local canonical files
+### Step 1 — Read bootstrap files
 1. `_shared/profile.md`
-2. `_shared/principles.md`
-3. `Coaches/GetBetterAt<Name>/profile.md`
-4. `Coaches/GetBetterAt<Name>/program.md` (if applicable)
-5. `Coaches/GetBetterAt<Name>/vocabulary.md` (or domain equivalent)
-6. Last 5 entries of `Coaches/GetBetterAt<Name>/sessions.md`
-7. `Coaches/GetBetterAt<Name>/context-snapshot.md`
+2. `Coaches/GetBetterAt<Name>/context-snapshot.md`
 
-Only THEN respond.
+Only THEN respond. Lazy-load deeper files when the conversation demands it — do NOT read everything upfront:
+- `Coaches/GetBetterAt<Name>/profile.md` — when discussing history, goals, or domain-specific state
+- `Coaches/GetBetterAt<Name>/program.md` — when discussing training plan, schedule, or progression
+- `Coaches/GetBetterAt<Name>/vocabulary.md` — when a specific term is mentioned
+- `Coaches/GetBetterAt<Name>/sessions.md` (last 5) — for pattern analysis or planning
+- Domain-specific files (recipes/, decisions/, pieces/, etc.) — only when directly relevant
+
+Reading 7 files before every "hi" adds 30+ seconds of unnecessary latency.
+Context-snapshot.md already contains compressed versions of profile, recent sessions, and program.
 
 ## Response style by scenario
 
