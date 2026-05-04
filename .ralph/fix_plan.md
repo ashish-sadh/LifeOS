@@ -50,13 +50,13 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 - [x] `docs/cross-domain-power.md` — concrete worked examples of the cross-domain intelligence
 - [x] `docs/multi-surface-strategy.md` — when to use which AI surface, real usage patterns
-- [ ] `docs/cost.md` — honest cost analysis: API tokens, Drive storage, OpenClaw, etc.
-- [ ] `docs/privacy.md` — what data is where, who can see what, how to make it more private
+- [x] `docs/cost.md` — honest cost analysis: API tokens, Drive storage, OpenClaw, etc.
+- [x] `docs/privacy.md` — what data is where, who can see what, how to make it more private
 
 ## Low Priority — quality
 
 - [ ] Add `shellcheck` lint comments in bash scripts
-- [ ] Run `bash -n` syntax check on all `.sh` files; fix any errors
+- [x] Run `bash -n` syntax check on all `.sh` files; fix any errors — all 5 scripts pass (bootstrap.sh + 4 scheduled)
 - [x] Standardize reading protocols across all coach `CLAUDE.md` files — fixed eager pre-read anti-pattern (7 files → 2 bootstrap files + lazy-load) in all 6 examples and the template
 - [ ] Fix `.claude/scheduled/` scripts: all 4 scripts hardcode `asheesh.sadh@gmail.com` in the LIFEOS path. Must use `$VAULT` instead. Additionally, `daily-11pm-consolidate.sh`, `daily-08am-brief.sh`, and `weekly-sun-10am-research.sh` reference `GetBetterAt/` instead of `Coaches/`. Pattern: replace `LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"` with `if [ -z "${VAULT:-}" ]; then exit 1; fi; LIFEOS="$VAULT"` and update all `GetBetterAt/` references to `Coaches/`.
 
