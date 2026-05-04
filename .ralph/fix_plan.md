@@ -87,9 +87,9 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 ## New tasks discovered this loop
 
 - [x] `examples/pole/` is missing `sessions.md`, `program.md`, `progressions/` — the other 5 examples are more complete; pole is the canonical reference so should match their depth
-- [ ] `ARCHITECTURE.md` skills table is stale — inbox-triage, cross-domain-link, and coach-research are new skills not listed in it
-- [ ] `templates/_shared/` templates — add template for `_shared/profile.md` and `_shared/principles.md` so new users have structure for shared files
-- [ ] `examples/pole/context-snapshot.md` — add sample context snapshot showing the 10 KB phone-bootstrap format
+- [x] `ARCHITECTURE.md` skills table is stale — inbox-triage, cross-domain-link, and coach-research are new skills not listed in it; also corrected the speed budget row (was "7 files", now "2 bootstrap files")
+- [x] `templates/_shared/` templates — already existed from initial commit (`profile.md`, `principles.md`, `schedule.md`); task is complete
+- [x] `examples/pole/context-snapshot.md` — add sample context snapshot showing the 10 KB phone-bootstrap format
 
 ## Architecture invariants (don't break these)
 
