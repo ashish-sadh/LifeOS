@@ -1,40 +1,26 @@
 # macOS
 .DS_Store
-.AppleDouble
-.LSOverride
 
-# Editor / IDE
+# Editor
 .vscode/
 .idea/
-*.swp
-*.swo
-*~
 
-# Obsidian (don't commit per-vault state)
-.obsidian/workspace*
-.obsidian/cache
-.obsidian/community-plugins.json
+# Drive folder IDs are sensitive (link to my actual Drive content)
+.claude/drive-config.json
 
-# Personal data — must NEVER be committed to public repo
-**/profile.md
-**/sessions.md
-**/program.md
-**/vocabulary.md
-**/context-snapshot.md
-**/_shared/profile.md
-**/_shared/schedule.md
-**/Daily/
-**/Inbox.md
-**/Ideas/
-**/Reading/
-**/Archive/
-**/drive-config.json
-**/.cache/
+# Claude Code local artifacts
+.claude/cache/
+.claude/sessions/
+.claude/history.jsonl
 
-# Templates and examples are OK; they don't have personal data
-!templates/**/*.md
-!examples/**/*.md
+# Logs
+*.log
+~/.cache/lifeos-logs/
 
-# Backup files
+# Sync state caches
+~/.cache/vault-*.json
+
+# Backups
 *.bak
 *.backup
+backups/

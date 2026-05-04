@@ -1,95 +1,143 @@
-# GetBetterAt
+# LifeOS
 
-A multi-coach personal AI system. Specialized AI coaches (pole, fitness, thinking, cooking, speaking, organized — whatever you want) backed by an Obsidian vault, talking to you across Mac CLI and phone via Claude.ai.
+A personal AI knowledge OS. Specialized AI coaches, daily-life assistant, and structured memory across domains (people, places, restaurants, events) — all in markdown, in your Google Drive, accessible from any AI surface.
 
-Built on append-only sync via Google Drive connector. No daemons required for the basic setup; bring Drive Desktop for cleaner restructuring.
+```
+LifeOS/
+├── _shared/                Global facts about you
+├── GetBetterAt/            Coaches (growth-oriented agents)
+│   ├── Pole/, Cooking/, Thinking/, Fitness/, Speaking/, Organized/
+├── Assistant/              Daily life logistics
+├── People/, Places/, Restaurants/, Events/
+└── Daily/, Inbox.md, Ideas/, Projects/, Reading/
+```
 
----
+Mac CLI for deep work. Phone Claude.ai for on-the-go. Gemini, ChatGPT, OpenClaw — any AI surface that can read your Drive can be a coach.
 
 ## What you get
 
-- **One vault, many coaches.** Each coach is a folder with its own profile, program, vocabulary, sessions, and persona. Shared user facts live in `_shared/` so you don't repeat yourself.
-- **Two modes that work in lockstep**:
-  - **Mac (powerful mode)** — Obsidian + Claude CLI. Edit anything, run skills, restructure freely.
-  - **Phone (lightweight mode)** — Claude.ai with Google Drive connector. Voice or text, reads vault, writes captures.
-- **Append-only sync via Google Drive.** Phone writes inbox messages; Mac integrates and pushes snapshots. Optional Drive Desktop install gets you bidirectional file sync and clean restructuring.
-- **Self-improving coaches.** Built-in skills (`coach-evolve`, `coach-meta-review`) prompt each coach to refine its own persona and structure based on real use.
-
-## How it feels
-
-```
-$ pole
-Welcome back. Last session you drilled chopper holds — how's the trap?
-Today's plan: shoulder mount conditioning + butterfly hip rotation.
-
-> just got out of class. butterfly clicked on the right.
-
-Logged. Noted right-side success on butterfly. Want to drill left next time?
-
-> yes. also worked on shoulder mount, foot down version. couldn't keep scaps engaged.
-
-Logged. Trap-protective scap engagement is a known stuck point — we'll spend
-20 min off-pole on scap pulls before next attempt.
-```
-
-On phone, same coach, same context, voice mode, no paste-back.
+- **Specialized coaches per domain**, with persistent personalized memory that compounds over months
+- **Self-improving personas** — coaches refine their own instructions based on what works for you
+- **Cross-device unified** — Mac CLI + phone Claude.ai + Gemini all reading the same vault
+- **Append-only sync via Google Drive** — no daemon required for basic use; install Drive Desktop for cleaner restructuring
+- **Markdown-based, portable forever** — no vendor lock-in
+- **Structured personal memory** — people, places, restaurants, events, all cross-linked
 
 ## Quickstart
 
 ```bash
-git clone https://github.com/ashish-sadh/GetBetterAt.git ~/.GetBetterAt
-~/.GetBetterAt/scripts/bootstrap.sh
+git clone https://github.com/ashish-sadh/LifeOS.git ~/workspace/LifeOS
+~/workspace/LifeOS/scripts/bootstrap.sh
 ```
 
-Then follow [SETUP.md](SETUP.md) for the manual steps:
-1. Authenticate Claude with Google Drive (`/mcp` in Claude Code)
-2. Create a Claude.ai project per coach with the system prompt template
-3. (Recommended) Install Google Drive Desktop for bidirectional sync
+Then:
 
-You'll have your first coach (`pole`, `cook`, `think`, whatever you spawn) running in ~30 minutes.
+1. Authenticate Google Drive in Claude (`/mcp` in any Claude Code session)
+2. Spawn your first coach (`brain` then "spawn a [domain] coach")
+3. Set up Claude.ai phone Project per coach (recipe in `_ai/claude-ai.md`)
+4. (Recommended) Install Google Drive Desktop for full sync
 
-## Architecture (one-liner)
+Detailed walkthrough: [SETUP.md](SETUP.md)
+
+## Repository contents
 
 ```
-Phone (Claude.ai + Drive connector) ↔ Drive (relay) ↔ Mac (Obsidian + Claude CLI)
-                                          ↑
-                           Append-only inbox + dated snapshots
+LifeOS/                          THIS REPO
+├── README.md, ARCHITECTURE.md, SETUP.md, CONTRIBUTING.md
+├── LICENSE                      MIT
+│
+├── skills/                      Agent Skills (12 of them)
+│   ├── obsidian-sync/, snapshot-regen/, vault-pull-inbox/, vault-push-snapshot/
+│   ├── daily-consolidate/, weekly-review/, idea-distill/, vault-maintain/
+│   ├── coach-evolve/, coach-meta-review/, spawn-coach/, retire-coach/
+│
+├── templates/                   Reusable templates
+│   ├── _shared/                 Profile/principles/schedule starter
+│   └── coach-template/          Generic coach scaffold
+│
+├── examples/                    Sanitized example coaches
+│   ├── pole/, cooking/, thinking/, fitness/, speaking/
+│
+├── _ai/                         Per-AI-surface setup recipes
+│   ├── claude-cli.md, claude-ai.md, gemini.md
+│   ├── chatgpt.md, openclaw.md, local-llm.md, voice-assistants.md
+│
+├── _system/                     Architectural journal
+│   └── architecture.md
+│
+├── .claude/                     Claude Code config
+│   ├── scheduled/               Background jobs (launchd-driven)
+│   └── settings.json
+│
+├── scripts/
+│   └── bootstrap.sh             Setup automation
+│
+└── docs/                        Deep-dives
+    ├── why.md, append-only.md, drive-desktop.md, extending.md
 ```
 
-Read [ARCHITECTURE.md](ARCHITECTURE.md) for the full design and why-it's-shaped-this-way.
+## Personal data lives in Google Drive
 
-## Why this exists
+This repo holds the framework — code, templates, examples. Your actual vault content (your profile, sessions, daily notes, etc.) lives at `My Drive/LifeOS/` on your Drive (synced to Mac via Drive Desktop). It's never in Git.
 
-Generic chatbots don't know you. Coaches that know you compound knowledge over time — your moves, your patterns, your body, your goals. This framework gives you persistent memory of what you've learned, structured by domain, accessible from any device, with no vendor lock-in (it's all markdown).
+## Architecture in one diagram
 
-Read [docs/why.md](docs/why.md) for the longer version.
+```
+┌─── Personal data (Google Drive) ─────────────────────┐
+│  My Drive/LifeOS/                                     │
+│  - All markdown content (profile, sessions, etc.)     │
+│  - Per-coach CLAUDE.md (customized personas)          │
+│  - Phone-written inbox files                          │
+│  - Mac-pushed snapshots                               │
+└──────────────────────────────────────────────────────┘
+        ↑                   ↑                   ↑
+        │                   │                   │
+   Mac filesystem       Drive connector     Drive web/app
+   (via Drive Desktop)  (Claude.ai phone)   (browse, search)
+        ↑                   ↑
+        │                   │
+   ┌────┴───┐         ┌─────┴──────┐
+   │ Mac CLI│         │  Phone     │
+   │ + Skills│         │  Claude.ai │
+   │ + Scheduled       │  (or Gemini,│
+   │   jobs │         │   ChatGPT) │
+   └────────┘         └────────────┘
+```
 
-## What's included
+## How coaches improve over time
 
-- **`skills/`** — Agent Skills that all coaches share: capture, sync, snapshot regeneration, weekly review, idea distillation, vault maintenance, coach evolution, coach spawning/retirement
-- **`templates/`** — Generic templates for new coaches and shared infrastructure
-- **`examples/`** — Sanitized example coaches (pole, cooking, thinking, fitness) you can copy and customize
-- **`scripts/`** — Setup automation
-- **`docs/`** — Architecture, design rationale, extending the system
+Three layers of refinement, run on different cadences:
+
+1. **Per-conversation** (every session): Phone writes inbox → Mac integrates into canonical files
+2. **Per-10-sessions** (`coach-evolve` skill): Coach reads its own history; proposes content extractions, vocabulary additions, profile refinements
+3. **Per-quarter** (`coach-meta-review` skill): Coach reviews its own CLAUDE.md against actual sessions; proposes self-corrections to its own persona
+
+Plus scheduled background work: daily morning briefs, weekly research, monthly audits. Output goes to `proposals/` for user review.
+
+## Cross-domain power
+
+The system's value emerges from cross-references:
+
+- *"Lunch with [[People/alex-smith]] tomorrow at [[Restaurants/sf/shizen]] — last time you tried omakase. Then pole class at [[Places/sf-pole-and-dance]] — coach says shoulder mount conditioning week 1."*
+
+This is what generic AI assistants can't do. They have no memory of your Alex, your Shizen, your pole instructor.
 
 ## Status
 
-**Active development.** Built originally for one user; framework being extracted for general use. APIs and conventions may evolve. Not 1.0 yet.
+**Active development.** Built originally as one user's personal install; framework being refined for general use. APIs and conventions may evolve.
 
 ## License
 
-MIT — do whatever, just don't blame me.
+MIT — fork freely, customize for yourself, contribute back if useful.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). New coach examples, skills, and domain templates welcome.
+See [CONTRIBUTING.md](CONTRIBUTING.md). New coach domain examples, skills, and AI surface recipes welcome.
 
-## Credits
+## Inspiration
 
-Built collaboratively with Claude (Anthropic) by [@ashish-sadh](https://github.com/ashish-sadh).
-
-Inspired by:
 - Tiago Forte (Building a Second Brain)
 - Andy Matuschak (evergreen notes)
-- Linus Lee (knowledge graphs)
+- Linus Lee (knowledge graphs as cognitive prosthetics)
 - The Obsidian community
+- Personal AI experiments by power users in 2024-2026
