@@ -42,9 +42,9 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 ## Medium Priority — domain templates
 
-- [ ] Add `templates/people-template.md` — standardize how People/<person>.md should look
-- [ ] Add `templates/places-template.md`, `templates/restaurants-template.md`, `templates/events-template.md`
-- [ ] These should match what's in `examples/` but be cleaner standalone templates
+- [x] Add `templates/people-template.md` — standardize how People/<person>.md should look
+- [x] Add `templates/places-template.md`, `templates/restaurants-template.md`, `templates/events-template.md`
+- [x] These should match what's in `examples/` but be cleaner standalone templates
 
 ## Low Priority — docs deep-dives
 
