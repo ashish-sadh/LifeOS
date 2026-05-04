@@ -29,7 +29,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 ## Medium Priority — new skills
 
-- [ ] Add `coach-research` skill that web-searches for new info in coach's domain and proposes additions
+- [x] Add `coach-research` skill that web-searches for new info in coach's domain and proposes additions
 - [x] Add `inbox-triage` skill — for processing Inbox.md (vault root) entries into proper homes
 - [x] Add `cross-domain-link` skill — finds opportunities to wikilink between People/Places/Events/Restaurants/Coaches
 
@@ -58,6 +58,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - [ ] Add `shellcheck` lint comments in bash scripts
 - [ ] Run `bash -n` syntax check on all `.sh` files; fix any errors
 - [ ] Standardize markdown frontmatter across all coach `CLAUDE.md` files
+- [ ] Fix `.claude/scheduled/weekly-sun-10am-research.sh`: hardcoded email in LIFEOS path, uses `GetBetterAt/` instead of `Coaches/`, and doesn't use `$VAULT`. Update to match `coach-research` SKILL.md algorithm.
 
 ## Low Priority — community / contribution
 
