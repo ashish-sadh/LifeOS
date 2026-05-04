@@ -64,7 +64,7 @@ Avoid:
 - **DO NOT delete `.ralph/`, `.ralphrc`, or `.gitignore`.**
 - **DO NOT alter MIT license, COPYRIGHT, etc.**
 - **DO NOT run `git push --force` or destructive git operations.**
-- **DO NOT modify the user's `.claude/drive-config.json` (gitignored anyway).**
+- **DO NOT modify ANY files under `.claude/`** — that directory is user-local Claude Code configuration (settings, scheduled scripts, drive-config.json). Claude Code blocks edits there by default and any task suggesting otherwise must be skipped.
 - **DO change**: `skills/`, `templates/`, `examples/`, `docs/`, `_ai/`, `_system/`, `scripts/`, top-level `*.md` files.
 
 ## Build & Run

@@ -58,7 +58,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - [x] Add `shellcheck` lint — installed shellcheck, fixed 3 real warnings in bootstrap.sh: SC2010 (ls|grep → glob loop), SC2088 (tilde in quotes → $HOME), SC2155 (declare+assign together → separate)
 - [x] Run `bash -n` syntax check on all `.sh` files; fix any errors — all 5 scripts pass (bootstrap.sh + 4 scheduled)
 - [x] Standardize reading protocols across all coach `CLAUDE.md` files — fixed eager pre-read anti-pattern (7 files → 2 bootstrap files + lazy-load) in all 6 examples and the template
-- [ ] Fix `.claude/scheduled/` scripts: all 4 scripts hardcode `asheesh.sadh@gmail.com` in the LIFEOS path. Must use `$VAULT` instead. Additionally, `daily-11pm-consolidate.sh`, `daily-08am-brief.sh`, and `weekly-sun-10am-research.sh` reference `GetBetterAt/` instead of `Coaches/`. Pattern: replace `LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"` with `if [ -z "${VAULT:-}" ]; then exit 1; fi; LIFEOS="$VAULT"` and update all `GetBetterAt/` references to `Coaches/`.
+- [USER-ONLY] Fix `.claude/scheduled/` scripts (deferred — `.claude/` is user-local config, Ralph cannot modify): all 4 scripts hardcode `asheesh.sadh@gmail.com` in LIFEOS path; should use `$VAULT`. Pattern: replace `LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"` with `if [ -z "${VAULT:-}" ]; then exit 1; fi; LIFEOS="$VAULT"` and `GetBetterAt/` → `Coaches/`. **Ralph: SKIP THIS TASK.**
 
 ## Low Priority — community / contribution
 
