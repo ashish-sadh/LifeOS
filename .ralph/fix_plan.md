@@ -49,7 +49,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 ## Low Priority — docs deep-dives
 
 - [x] `docs/cross-domain-power.md` — concrete worked examples of the cross-domain intelligence
-- [ ] `docs/multi-surface-strategy.md` — when to use which AI surface, real usage patterns
+- [x] `docs/multi-surface-strategy.md` — when to use which AI surface, real usage patterns
 - [ ] `docs/cost.md` — honest cost analysis: API tokens, Drive storage, OpenClaw, etc.
 - [ ] `docs/privacy.md` — what data is where, who can see what, how to make it more private
 
