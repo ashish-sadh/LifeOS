@@ -120,18 +120,91 @@ The skill scans for these triggers:
 
 ## Configuration
 
-Thresholds can be overridden in `Vault/.claude/maintain-config.json`:
+Thresholds live in `Vault/.claude/maintain-config.json`. All fields are optional — omit a field to use its default.
 
 ```json
 {
+  "version": 1,
+
   "sessions_archive_threshold": 60,
+  // Line-count in sessions.md before archiving oldest quarter.
+  // Lower = more aggressive archiving. Default: 60.
+
+  "sessions_archive_unit": "entries",
+  // "entries" (count ## headings) or "lines". Default: "entries".
+
   "vocab_split_threshold": 25,
+  // Entry count in vocabulary.md before proposing category split. Default: 25.
+
+  "theme_extraction_min_mentions": 3,
+  // How many session/inbox mentions of a topic over the look-back window
+  // before proposing a dedicated progression/theme file. Default: 3.
+
+  "theme_extraction_window_days": 28,
+  // How many days to look back when counting mentions. Default: 28 (4 weeks).
+
   "snapshot_max_kb": 10,
+  // Hard cap for context snapshots. Used by compress-snapshot action. Default: 10.
+
   "snapshot_age_force_regen_days": 30,
+  // Days since last push before force-regenerate is proposed. Default: 30.
+
   "inbox_drive_cleanup_threshold": 50,
+  // File count in Drive inbox folder before cleanup is suggested. Default: 50.
+
+  "inbox_consolidate_threshold": 3,
+  // Unprocessed inbox entries in one day before daily-consolidate is proposed. Default: 3.
+
+  "profile_gap_resurface_days": 14,
+  // Days an unfilled profile gap stays quiet before it gets resurfaced. Default: 14.
+
+  "daily_archive_after_days": 30,
+  // Days since last touch before a Daily/ entry is suggested for archiving. Default: 30.
+
+  "ideas_stale_after_days": 90,
+  // Days untouched before an Ideas/ file appears in stale list. Default: 90.
+
+  "projects_stale_after_days": 60,
+  // Days with no activity before a Projects/ file appears in stale list. Default: 60.
+
+  "coach_inactive_after_days": 60,
+  // Days with no sessions before retire-coach is suggested. Default: 60.
+
   "auto_suggest_after_days": 7
+  // Days between auto-suggestions at session start. Default: 7. Set 0 to disable.
 }
 ```
+
+### Per-coach overrides
+
+Any coach can override global thresholds in `Coaches/GetBetterAt<Name>/.maintain-config.json`. Same schema; only fields present are overridden.
+
+Example — a writing coach where pieces accumulate slowly (don't archive aggressively):
+
+```json
+{
+  "sessions_archive_threshold": 120,
+  "coach_inactive_after_days": 90
+}
+```
+
+Example — a daily-use fitness coach where inbox is high-volume:
+
+```json
+{
+  "inbox_drive_cleanup_threshold": 20,
+  "inbox_consolidate_threshold": 2,
+  "snapshot_age_force_regen_days": 7
+}
+```
+
+### Read order
+
+1. Built-in defaults (listed above)
+2. `Vault/.claude/maintain-config.json` (global overrides)
+3. `Coaches/<coach>/.maintain-config.json` (per-coach overrides)
+
+Each level overrides the previous; unset fields fall back to the outer level.
 
 ## Why this matters
 

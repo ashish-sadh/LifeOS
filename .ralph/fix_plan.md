@@ -25,7 +25,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - [x] `vault-push-snapshot` skill: clarify the snapshot template; ensure size cap (10 KB) is enforced
 - [x] `coach-evolve` skill: add example output report so users know what to expect
 - [x] `spawn-coach` skill: document the onboarding interview round structure per domain
-- [ ] `vault-maintain` skill: define the threshold-config.json schema clearly
+- [x] `vault-maintain` skill: define the threshold-config.json schema clearly
 
 ## Medium Priority — new skills
 
