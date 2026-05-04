@@ -22,8 +22,10 @@ detect_vault_path() {
         echo "$VAULT"
         return
     fi
-    local drive_account
-    drive_account=$(ls "$HOME/Library/CloudStorage/" 2>/dev/null | grep "^GoogleDrive-" | head -1 || true)
+    local drive_account=""
+    for d in "$HOME/Library/CloudStorage/GoogleDrive-"*/; do
+        [ -d "$d" ] && drive_account="$(basename "$d")" && break
+    done
     if [ -n "$drive_account" ]; then
         echo "$HOME/Library/CloudStorage/$drive_account/My Drive/Vault"
         return
@@ -56,12 +58,13 @@ step_link_skills() {
     local link="$HOME/.claude/skills"
 
     if [ -L "$link" ]; then
-        ok "~/.claude/skills symlink already exists ($(readlink "$link"))"
+        ok "$HOME/.claude/skills symlink already exists ($(readlink "$link"))"
         return
     fi
 
     if [ -d "$link" ]; then
-        local backup="$link.bak.$(date +%Y%m%d%H%M%S)"
+        local backup
+        backup="$link.bak.$(date +%Y%m%d%H%M%S)"
         mv "$link" "$backup"
         warn "Backed up existing ~/.claude/skills → $backup"
     fi
