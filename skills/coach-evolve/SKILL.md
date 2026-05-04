@@ -103,17 +103,64 @@ Coach-evolve produces a report:
 Reply with the numbers you want to apply, or "all" / "none".
 ```
 
+## Applying selected items
+
+After the user replies (e.g., "1, 3" or "all" or "just the vocabulary ones"), confirm exactly what you're about to do before writing:
+
+> *"Applying 3 items:*
+> *1. Extracting `progressions/shoulder-mount.md` from session notes*
+> *2. Adding 'Cup grip' and 'Aysha' to vocabulary.md*
+> *3. Updating profile.md: left-side weakness → left external hip rotation specifically*
+>
+> *Skipping: persona refinement (you want to think on it), stale 'Rating 1-10' field (keeping for now)*
+>
+> *Proceed?"*
+
+After confirmation, apply changes. For each:
+- **Theme extraction**: create the new file with structured content pulled from sessions
+- **Vocabulary**: add or update entries with source sessions cited
+- **Profile**: append timestamped change block, never overwrite
+- **Persona**: edit CLAUDE.md Voice section, show before/after diff
+- **Stale field removal**: show what you're removing, confirm before deleting
+
+When done: regenerate snapshot via `vault-push-snapshot`.
+
+If user says "none": acknowledge and suggest when to revisit ("come back to this after a few more sessions").
+
+## Lite evolve (for newly spawned coaches)
+
+Run when invoked immediately after `spawn-coach` or when session count is 1–5. Skips session-history analyses and focuses on structure only:
+
+```
+## Lite Coach Evolution — Fitness Coach (session 0, just spawned)
+
+### Structure check
+1. profile.md has "Open gaps" section with 3 items — looks good
+2. No progressions/ folder yet — that's fine, create when first pattern emerges
+3. CLAUDE.md "Voice" section is template default — should be personalized after 3-5 sessions
+
+### Nothing to extract yet (< 5 sessions needed for theme detection)
+
+Re-run this after session 5 for a full evolution report.
+```
+
+Lite evolve writes nothing — it's informational only.
+
 ## Algorithm
 
-1. Verify coach has enough history (>5 sessions; otherwise too early to evolve)
+1. Check session count:
+   - 0–5: run lite evolve (structure check only, no writes)
+   - <5 for full: decline with message: "Not enough session history yet — run after 5+ sessions."
 2. Read all coach files
 3. Run the 6 analyses above
 4. If any analysis produces zero items, omit that section
-5. Compose the report
-6. Wait for user input
-7. Apply selected items
-8. After applying, regenerate snapshot via `vault-push-snapshot`
-9. Update `~/.cache/vault-coach-evolve-history.json` with timestamp and what was applied
+5. Cap at 8 proposed items total — drop lowest-priority if over
+6. Compose the report
+7. Wait for user input
+8. Confirm selected items before applying
+9. Apply selected items
+10. After applying, regenerate snapshot via `vault-push-snapshot`
+11. Update `~/.cache/vault-coach-evolve-history.json` with timestamp and what was applied
 
 ## Frequency
 
