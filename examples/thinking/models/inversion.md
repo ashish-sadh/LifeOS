@@ -1,7 +1,7 @@
 # Inversion
 
 **Where I learned it**: Charlie Munger / Poor Charlie's Almanack
-**Times I've used it**: 0 (update as you use it)
+**Times I've used it**: 3
 **Effectiveness**: high when remembered — easy to skip under pressure
 
 ## What it is
@@ -34,7 +34,8 @@ The insight is that failure modes are often more visible and enumerable than suc
 ## Examples I've applied it to
 
 - [[decisions/2026-09-15-job-offer]] — "what would make accepting this regrettable?" → identified runway risk and engineering-PM chemistry gap as the real unknowns to probe
-- <add your own as you use it>
+- Conference talk decision (Apr 2026) — "what would have to be true for this to be the wrong call?" → surfaced that I had neither the content nor the timing. Changed the decision from yes to defer.
+- Mid-Q2 hiring decision (May 2026) — applied as part of second-order analysis; "what makes adding a PM mid-cycle fail?" → identified onboarding overhead and scope-signal risk
 
 ## Related models
 

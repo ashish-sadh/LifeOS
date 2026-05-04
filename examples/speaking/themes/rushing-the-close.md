@@ -1,7 +1,7 @@
 # Rushing the close
 
 **Pattern type**: delivery — pacing
-**First observed**: <YYYY-MM-DD>
+**First observed**: 2026-04-30
 **Times observed**: 3
 **Trend**: recurring — not improving without active attention
 

@@ -8,33 +8,38 @@ This file is read at session start. It lets the coach respond to new work with r
 
 ## Signatures (what appears in the best work)
 
-Coach adds entries here after reading across multiple pieces. Each entry is specific and evidenced — not "good at imagery" but what kind, in what context.
+- **2026-03-18**: Short declarative sentences followed by physical specificity. The best sentences make one concrete observation and stop. Compression is the through-line: appears in the strongest paragraphs of all six pieces reviewed. Contrast with the weakest sections, which are long compound constructions with subordinate clauses.
 
-- <YYYY-MM-DD>: <e.g., "Opens paragraphs with a concrete physical detail before moving to abstraction. Works: anchors the reader. Appears in 4 of 6 pieces reviewed.">
-- <YYYY-MM-DD>: <e.g., "Endings arrive one beat early — stops before the obvious summary. Leaves resonance. Best essays do this consistently.">
-- <YYYY-MM-DD>: <e.g., "Sentence rhythm: alternates short declarative sentences with longer subordinate constructions. The rhythm is a signature — readable and distinct.">
+- **2026-03-18**: Endings that arrive one beat early — stops before the obvious summary statement. "The Last Apartment" ending (the coat hook) is the clearest example: it's a physical detail that carries the emotional weight without naming it. The best essays do this; the weaker ones add a summary sentence after the right stopping point.
+
+- **2026-09-14**: Paragraph openings with a concrete physical detail before any abstraction. "The movers arrived at eight, earlier than I'd asked for, and I didn't have coffee yet." Grounds the reader in scene before moving to meaning. Appears in 4 of 8 pieces reviewed. Works as a signature when the detail is specific; fails when the detail is generic.
 
 ## Recurring strengths to lean into
 
-- <specific craft element that appears when writing is working>
+- Compression under revision — finds the sharper version by cutting, not adding
+- The specific-then-restrained observation (name the thing precisely; don't over-explain its significance)
+- Endings: knows when to stop; rarely over-explains the close
 
 ## Recurring tics to watch
 
-Coach adds entries here when a pattern appears three or more times and isn't serving the work.
+- **2026-02-25**: Context-dump openings — writing 300-500 words of background before finding the actual beginning of the piece. Appeared in "The Audit" draft 1 (400-word context dump before the real opening). Improving: "The Last Apartment" draft 1 already opened mid-scene without coaching.
 
-- <YYYY-MM-DD>: <e.g., "Qualifies emotional claims with 'perhaps' or 'maybe' — hedging on feeling. 'Perhaps I was scared' instead of 'I was scared.' Appears under pressure or when topic is personal. Usually safe to cut the qualifier.">
-- <YYYY-MM-DD>: <e.g., "Paragraph exits that summarize what the paragraph just showed. Trust the showing.">
+- **2026-04-22**: Emotional backup sections — sections that explicitly state the feeling the piece is already showing elsewhere, as insurance. Appeared in "The Audit" (the parents section: explicitly named the feeling the spreadsheet scene had already shown). Almost always cuttable. Watch for this in revision at the paragraph level too, not just the section level.
+
+- **2026-03-18**: Middles that are chronological sequences rather than structured development. Appears in first drafts of both long essays. The chronology provides order but not argument. Fix: identify the central feeling or claim and restructure the middle around its development, not the timeline.
 
 ## Voice under pressure
 
 What happens when writing is going badly (deadline pressure, subject too close, unclear audience):
-- <e.g., "Prose goes abstract — loses the specific detail that makes the good work good">
-- <e.g., "Sentences get longer and more complex, as if density substitutes for clarity">
+
+- Prose goes abstract — loses the specific physical detail that makes the good work land. The tic toward long compound sentences is a stress signal.
+- The emotional backup tic emerges — when uncertain, states the feeling explicitly rather than trusting the showing.
 
 ## What peers/editors have said (recurring)
 
-- <e.g., "Your best paragraphs are the ones where you just say the thing directly — you often warm up to it instead.">
-- <e.g., "Your endings are strong. Your openings bury the lede.">
+- "The opening is disarming — the wrongfooting works." (Workshop reader, "The Last Apartment," Sep 10)
+- "I lost you in the middle. By paragraph 5 I wasn't sure where we were going." (Same reader — structural diagnosis matches coach's)
+- "The ending redeemed it for me, but you have to earn it better." (Same reader — valid; the middle needs to carry more weight before the close)
 
 ---
 

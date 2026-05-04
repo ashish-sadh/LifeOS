@@ -97,6 +97,10 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - [x] `templates/_shared/` templates — already existed from initial commit (`profile.md`, `principles.md`, `schedule.md`); task is complete
 - [x] `examples/pole/context-snapshot.md` — add sample context snapshot showing the 10 KB phone-bootstrap format
 
+## New tasks discovered this loop (temporal consistency)
+
+- [x] `examples/thinking/`, `examples/speaking/`, `examples/writing/` — sessions.md and context-snapshot.md were at April 2026, but pre-existing subdirectory files (decisions/, talks/, pieces/) were September 2026. Extended sessions logs to September and regenerated snapshots; also populated writing/voice.md and fixed placeholder values in speaking/themes/rushing-the-close.md and thinking/models/inversion.md.
+
 ## Architecture invariants (don't break these)
 
 - Code in this repo, data in Drive
