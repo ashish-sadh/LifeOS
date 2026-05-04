@@ -84,6 +84,13 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - Don't bloat — prefer fewer, deeper improvements over many shallow ones
 - When in doubt, prioritize: (a) onboarding, (b) examples, (c) docs, (d) skills polish, (e) new skills
 
+## New tasks discovered this loop
+
+- [x] `examples/pole/` is missing `sessions.md`, `program.md`, `progressions/` — the other 5 examples are more complete; pole is the canonical reference so should match their depth
+- [ ] `ARCHITECTURE.md` skills table is stale — inbox-triage, cross-domain-link, and coach-research are new skills not listed in it
+- [ ] `templates/_shared/` templates — add template for `_shared/profile.md` and `_shared/principles.md` so new users have structure for shared files
+- [ ] `examples/pole/context-snapshot.md` — add sample context snapshot showing the 10 KB phone-bootstrap format
+
 ## Architecture invariants (don't break these)
 
 - Code in this repo, data in Drive
