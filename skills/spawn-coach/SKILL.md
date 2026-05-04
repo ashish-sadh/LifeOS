@@ -49,7 +49,21 @@ End-to-end:
    - `Vault/<coach-shortname>/snapshots/`
    - `Vault/<coach-shortname>/inbox/`
    - `Vault/<coach-shortname>/days/`
-   - Update `Vault/.claude/drive-config.json` with new folder IDs
+   - **Update `Vault/.claude/drive-config.json` with new folder IDs.** Resolve them via Drive `search_files` after the desktop sync uploads the new folders (usually <30s). If the file does not exist yet, create it with this schema:
+     ```json
+     {
+       "version": 1,
+       "vault_root_id": "<root>",
+       "coaches": {
+         "<shortname>": {
+           "local_path": "GetBetterAt/<Name>",
+           "inbox_id": "<id>",
+           "snapshots_id": "<id>"
+         }
+       }
+     }
+     ```
+     This file is **load-bearing** — without it, `vault-pull-inbox` cannot run and phone→Mac sync silently breaks. Don't skip it.
 
 6. **Push initial snapshot to Drive**
    - Use `vault-push-snapshot` skill
@@ -136,6 +150,8 @@ Adapt rounds to domain. For pole the rounds are different (move inventory, body 
 - Don't push the user — if they want to skip a round, mark it as "to fill in later"
 - Don't create a coach with the same name as existing one without confirming overwrite
 - Don't add the alias if it conflicts with an existing alias (e.g., `cook` is already a system command on some setups — check)
+- **Don't write a coach `CLAUDE.md` with eager pre-reads** (e.g., "read 6 files before responding to ANY message"). That produces 30s+ latency on a "hi". Default to reading `context-snapshot.md` only at session start; lazy-load deeper files only when the conversation demands it. The Pole coach's CLAUDE.md is the legacy anti-pattern — don't copy it verbatim.
+- **Don't skip creating/updating `.claude/drive-config.json`** (see step 5) — without it, the phone→Mac inbox sync silently breaks.
 
 ## Inputs
 
