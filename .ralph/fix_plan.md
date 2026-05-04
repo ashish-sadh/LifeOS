@@ -38,7 +38,7 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - [ ] `_ai/gemini.md`: try the actual setup, document quirks discovered
 - [ ] `_ai/chatgpt.md`: same — actual test, real screenshots/quirks
 - [ ] `_ai/openclaw.md`: when OpenClaw is installed and tested, document the real config (currently aspirational)
-- [ ] `_ai/claude-desktop.md`: write recipe for using Claude Desktop with mcp-obsidian, including config snippet
+- [x] `_ai/claude-desktop.md`: write recipe for using Claude Desktop with mcp-obsidian, including config snippet
 
 ## Medium Priority — domain templates
 
