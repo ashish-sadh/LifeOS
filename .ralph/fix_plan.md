@@ -84,6 +84,11 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 - Don't bloat — prefer fewer, deeper improvements over many shallow ones
 - When in doubt, prioritize: (a) onboarding, (b) examples, (c) docs, (d) skills polish, (e) new skills
 
+## New tasks discovered this loop (loop 14+)
+
+- [x] `examples/cooking/` is missing `sessions.md`, `vocabulary.md`, `context-snapshot.md` — added all three; cooking is the most accessible entry point for new users
+- [ ] `examples/fitness/`, `examples/thinking/`, `examples/speaking/`, `examples/writing/` — same gap: missing sessions.md, vocabulary.md, context-snapshot.md. Each example should be as complete as pole and cooking.
+
 ## New tasks discovered this loop
 
 - [x] `examples/pole/` is missing `sessions.md`, `program.md`, `progressions/` — the other 5 examples are more complete; pole is the canonical reference so should match their depth
