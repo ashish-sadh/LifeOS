@@ -6,23 +6,31 @@ The key idea: **each AI surface gets a short bootstrap prompt that points at you
 
 ---
 
-## Your Drive folder/file IDs (from `.claude/drive-config.json`)
+## Your Drive folder/file IDs
 
-| Resource | ID |
+> **You don't need to look these up manually.** When you run `spawn-coach` from the `brain` alias, it outputs a pre-filled system prompt with your real IDs already substituted in. Copy that prompt directly into your Claude.ai project.
+>
+> The placeholders below show the structure — your IDs will be different from anyone else's.
+
+| Resource | Where to find it |
 |---|---|
-| **LifeOS root folder** | `16R7Im7U03s-7HcNVPOL1hJRVUZ9RQuV1` |
-| **Pole coach folder** | `19jBEGKmUshHlq0ua_yLKKhUbXyc1JvIV` |
-| **Pole CLAUDE.md (bootstrap file)** | `1w-hCPfmu2xesAW-zPQmh2ynSrNRUjiT5` |
-| **Pole inbox folder** (where phone writes captures) | `1MQDdCu_4ELqPBD8RlE7HAIYbAVqdykBo` |
-| **Pole snapshots folder** | `1b81antYO8my769n4BdXZCeO6HYewToNs` |
+| **Vault root folder** | Run `spawn-coach`, check `.claude/drive-config.json` → `vault_root_id` |
+| **Coach folder** (e.g., Pole) | `.claude/drive-config.json` → `coaches.pole.folder_id` |
+| **Coach CLAUDE.md** (bootstrap file) | Search Drive for `CLAUDE.md` inside your coach folder; copy file ID from URL |
+| **Coach inbox folder** (phone writes here) | `.claude/drive-config.json` → `coaches.pole.inbox_id` |
+| **Coach snapshots folder** | `.claude/drive-config.json` → `coaches.pole.snapshots_id` |
 
-You'll paste these into system prompts below.
+If you need to look up an ID manually: open the file or folder in Drive web, copy the ID from the URL (`/folders/<ID>` or `/file/d/<ID>`).
+
+You'll paste these into system prompts below — or just use the pre-filled prompt from `spawn-coach`.
 
 ---
 
 ## 1. Claude.ai (phone + web) — Pole Coach
 
 **One-time setup, ~3 min.**
+
+> **Shortcut**: run `brain` on Mac, say "spawn a pole coach" — `spawn-coach` outputs a pre-filled version of the prompt below with your real IDs. Copy-paste that directly.
 
 ### Steps
 
@@ -32,14 +40,17 @@ You'll paste these into system prompts below.
    - Name: `Pole Coach`
    - (optional description: "My pole dance coach. Reads vault from Drive.")
 4. Tap **"Add instructions"** (or "Custom instructions" depending on app version)
-5. Paste this exactly:
+5. Paste the system prompt from `spawn-coach`. If building manually, use this template — **replace both `YOUR_*` placeholders with your real IDs**:
 
 ```
 You are my pole dance coach.
 
 BEFORE responding to ANY message, you MUST use the Google Drive connector to read this file. It contains your full instructions, persona, and protocols:
 
-  read_file_content with fileId: 1w-hCPfmu2xesAW-zPQmh2ynSrNRUjiT5
+  read_file_content with fileId: YOUR_CLAUDE_MD_FILE_ID
+
+(YOUR_CLAUDE_MD_FILE_ID is the Drive file ID for Vault/Coaches/GetBetterAtPole/CLAUDE.md
+ — your ID will differ from anyone else's. Find it in .claude/drive-config.json after running spawn-coach.)
 
 That file is canonical — follow it exactly.
 
@@ -47,11 +58,14 @@ If you cannot read the file (insufficient permissions, etc.), tell me and stop. 
 
 When the conversation produces information worth keeping (session log, vocabulary additions, profile observations):
 - Use create_file to write a new inbox file:
-  parentId: 1MQDdCu_4ELqPBD8RlE7HAIYbAVqdykBo
+  parentId: YOUR_INBOX_FOLDER_ID
   title: YYYY-MM-DDTHH-MM-<topic>.md (use current local time)
   contentMimeType: text/markdown
   disableConversionToGoogleType: true
   textContent: structured per the format in CLAUDE.md you just read
+
+(YOUR_INBOX_FOLDER_ID is the Drive folder ID for Vault/Coaches/GetBetterAtPole/inbox/
+ — also in .claude/drive-config.json.)
 
 The connector cannot UPDATE existing files — only CREATE new ones. The inbox folder is append-only. My Mac will integrate these into canonical files when I run `pole`.
 
@@ -62,7 +76,7 @@ Don't summarize at end of every message. Match my pace.
 7. **Pin** it (long-press → Pin, or pin icon)
 8. **Test**: open project, ask *"What's my pole status?"*
 
-Expected: Claude says it's reading from Drive, then references your specifics (right trap, shoulder mount progression, butterfly, etc.).
+Expected: Claude says it's reading from Drive, then references your specifics.
 
 If it gives generic advice without your context → file ID wrong, or Drive connector permissions too narrow. Re-run `/mcp` in Claude Code on Mac to refresh the connector if needed.
 
@@ -84,23 +98,25 @@ You are my pole dance coach.
 
 BEFORE responding to ANY message, use @Drive to read this file (it contains your full instructions):
 
-  My Drive/LifeOS/GetBetterAt/Pole/CLAUDE.md
+  My Drive/Vault/Coaches/GetBetterAtPole/CLAUDE.md
+
+(Adjust the path if your vault is in a subfolder or named differently.)
 
 That file is canonical — follow it exactly.
 
 When the conversation produces information worth keeping (session log, vocabulary additions, profile observations):
 - Option A (preferred since you have full Drive access): UPDATE the appropriate canonical file directly:
-  - Session log → append to My Drive/LifeOS/GetBetterAt/Pole/sessions.md
-  - New vocabulary → add or update entry in My Drive/LifeOS/GetBetterAt/Pole/vocabulary.md
-  - Profile observation → append timestamped note to My Drive/LifeOS/GetBetterAt/Pole/profile.md
-- Option B (fallback): create a new file in My Drive/LifeOS/GetBetterAt/Pole/inbox/ with timestamp filename. My Mac will integrate it.
+  - Session log → append to My Drive/Vault/Coaches/GetBetterAtPole/sessions.md
+  - New vocabulary → add or update entry in My Drive/Vault/Coaches/GetBetterAtPole/vocabulary.md
+  - Profile observation → append timestamped note to My Drive/Vault/Coaches/GetBetterAtPole/profile.md
+- Option B (fallback): create a new file in My Drive/Vault/Coaches/GetBetterAtPole/inbox/ with timestamp filename. My Mac will integrate it.
 
 Use Option A whenever possible since you have native Drive write access (unlike Claude.ai's create-only connector).
 
 Don't summarize at end of every message. Match my pace.
 ```
 
-5. (Optional) **Knowledge**: attach the `LifeOS/GetBetterAt/Pole/` folder via @Drive
+5. (Optional) **Knowledge**: attach the `Vault/Coaches/GetBetterAtPole/` folder via @Drive
 6. **Save** Gem
 7. **Test**: ask *"What's my pole status?"*
 
@@ -127,18 +143,20 @@ You are my pole dance coach.
 
 BEFORE responding to ANY message, use the Google Drive connector to read this file:
 
-  My Drive/LifeOS/GetBetterAt/Pole/CLAUDE.md
+  My Drive/Vault/Coaches/GetBetterAtPole/CLAUDE.md
+
+(Adjust the path if your vault is in a subfolder or named differently.)
 
 That file is canonical — follow it exactly.
 
 When you produce information worth keeping (session log, vocabulary additions, profile observations):
-- Create a new file at: My Drive/LifeOS/GetBetterAt/Pole/inbox/YYYY-MM-DDTHH-MM-<topic>.md
+- Create a new file at: My Drive/Vault/Coaches/GetBetterAtPole/inbox/YYYY-MM-DDTHH-MM-<topic>.md
 - Use the structured format described in CLAUDE.md
 
 Don't summarize at end of every message. Match my pace.
 ```
 
-4. **Knowledge**: enable Google Drive integration (in the GPT builder), point at the LifeOS folder if available
+4. **Knowledge**: enable Google Drive integration (in the GPT builder), point at the `Vault/Coaches/GetBetterAtPole/` folder if available
 5. **Capabilities**: enable web browsing (useful for coach research)
 6. **Save** GPT
 7. **Test**: *"What's my pole status?"*
@@ -204,10 +222,9 @@ After initial setup, you NEVER need to touch the system prompts again. To refine
 
 1. On Mac, type the coach alias (e.g., `pole`)
 2. Edit the persona via conversation: *"update my CLAUDE.md to be more direct, less encouraging"*
-3. Coach updates `My Drive/LifeOS/GetBetterAt/Pole/CLAUDE.md`
-4. Drive Desktop syncs to cloud
-5. Next phone session: phone Claude reads the updated file via the same bootstrap prompt
-6. Persona is updated everywhere
+3. Coach updates `Vault/Coaches/GetBetterAtPole/CLAUDE.md` (Drive Desktop syncs it to cloud)
+4. Next phone session: phone Claude reads the updated file via the same bootstrap prompt
+5. Persona is updated everywhere — no changes needed to the system prompt
 
 This is the value of the bootstrap pattern.
 
@@ -243,7 +260,7 @@ Repeat per coach. Each lives as its own pinned project.
 | Symptom | Fix |
 |---|---|
 | Claude says "insufficient permissions" reading file | Re-authenticate Google Drive connector in Claude.ai Settings |
-| Claude responds generically | File ID wrong, or persona file is empty/malformed. Verify `My Drive/LifeOS/GetBetterAt/Pole/CLAUDE.md` exists and has content |
+| Claude responds generically | File ID wrong, or persona file is empty/malformed. Verify `Vault/Coaches/GetBetterAtPole/CLAUDE.md` exists in Drive and has content |
 | Phone writes don't appear on Mac | Check Drive Desktop sync status on Mac. Force pause/resume if stuck |
 | "fileId not found" | The file was deleted and re-created (different ID). Update system prompt with new ID |
 | Multiple Claude.ai projects all named "Pole Coach" | Delete duplicates, keep one |
