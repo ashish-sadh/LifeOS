@@ -3,18 +3,18 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.lifeos.daily-11pm-consolidate</string>
+    <string>com.lifeos.daily-08am-brief</string>
 
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/ashishsadh/workspace/LifeOS/.claude/scheduled/daily-11pm-consolidate.sh</string>
+        <string>/Users/ashishsadh/workspace/LifeOS/.claude/scheduled/daily-08am-brief.sh</string>
     </array>
 
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
-        <integer>23</integer>
+        <integer>8</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
@@ -29,9 +29,9 @@
     <integer>60</integer>
 
     <key>StandardOutPath</key>
-    <string>/Users/ashishsadh/.cache/lifeos-logs/daily-consolidate.out</string>
+    <string>/Users/ashishsadh/.cache/lifeos-logs/morning-brief.out</string>
     <key>StandardErrorPath</key>
-    <string>/Users/ashishsadh/.cache/lifeos-logs/daily-consolidate.err</string>
+    <string>/Users/ashishsadh/.cache/lifeos-logs/morning-brief.err</string>
 
     <key>EnvironmentVariables</key>
     <dict>

@@ -1,18 +1,32 @@
 #!/usr/bin/env bash
 # Weekly Sunday 10am: per-coach research
 # Each active coach searches the web for new info in its domain, cross-references with user state, proposes additions.
+#
+# Stamp guard: Sundays only, after 10:00, once per Sunday.
 
 set -euo pipefail
 
 LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"
-DATE=$(date +%Y-%m-%d)
-LOG="$HOME/.cache/lifeos-logs/weekly-research.log"
+LOG_DIR="$HOME/.cache/lifeos-logs"
+STAMP="$LOG_DIR/weekly-research.stamp"
+LOG="$LOG_DIR/weekly-research.log"
 
-mkdir -p "$(dirname "$LOG")" "$LIFEOS/proposals"
+mkdir -p "$LOG_DIR" "$LIFEOS/proposals"
+
+TARGET_HOUR=10
+DOW=$(date +%u)
+TODAY=$(date +%Y-%m-%d)
+HOUR=$(date +%H | sed 's/^0//')
+LAST=$(cat "$STAMP" 2>/dev/null || echo "")
+
+[ "$DOW" -ne 7 ] && exit 0
+[ "$LAST" = "$TODAY" ] && exit 0
+[ "$HOUR" -lt "$TARGET_HOUR" ] && exit 0
+
+DATE="$TODAY"
 
 cd "$LIFEOS"
 
-# Find active coach folders
 COACHES=$(ls -d "$LIFEOS/GetBetterAt/"*/ 2>/dev/null | xargs -n1 basename)
 
 for COACH in $COACHES; do
@@ -60,7 +74,8 @@ Confidence: <high / medium / low>
 <related notes already in vocabulary or progressions>
 
 Be selective. Better 2 high-quality findings than 5 mediocre ones.
-" > "$LOG.coach-$COACH" 2>&1
+" >> "$LOG.coach-$COACH" 2>&1
 done
 
 echo "Weekly research complete for: $COACHES" >> "$LOG"
+echo "$TODAY" > "$STAMP"

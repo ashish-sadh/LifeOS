@@ -3,18 +3,20 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.lifeos.daily-11pm-consolidate</string>
+    <string>com.lifeos.weekly-sun-09am-review</string>
 
     <key>ProgramArguments</key>
     <array>
         <string>/bin/bash</string>
-        <string>/Users/ashishsadh/workspace/LifeOS/.claude/scheduled/daily-11pm-consolidate.sh</string>
+        <string>/Users/ashishsadh/workspace/LifeOS/.claude/scheduled/weekly-sun-09am-review.sh</string>
     </array>
 
     <key>StartCalendarInterval</key>
     <dict>
+        <key>Weekday</key>
+        <integer>0</integer>
         <key>Hour</key>
-        <integer>23</integer>
+        <integer>9</integer>
         <key>Minute</key>
         <integer>0</integer>
     </dict>
@@ -29,9 +31,9 @@
     <integer>60</integer>
 
     <key>StandardOutPath</key>
-    <string>/Users/ashishsadh/.cache/lifeos-logs/daily-consolidate.out</string>
+    <string>/Users/ashishsadh/.cache/lifeos-logs/weekly-review.out</string>
     <key>StandardErrorPath</key>
-    <string>/Users/ashishsadh/.cache/lifeos-logs/daily-consolidate.err</string>
+    <string>/Users/ashishsadh/.cache/lifeos-logs/weekly-review.err</string>
 
     <key>EnvironmentVariables</key>
     <dict>

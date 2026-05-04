@@ -2,15 +2,28 @@
 # Daily 8am morning brief
 # Reads calendar (when integrated), people (birthdays), each active coach's recent state.
 # Writes synthesis to LifeOS/proposals/<date>-morning-brief.md
+#
+# Stamp guard ensures one run per day even with multi-trigger launchd config.
 
 set -euo pipefail
 
 LIFEOS="$HOME/Library/CloudStorage/GoogleDrive-asheesh.sadh@gmail.com/My Drive/LifeOS"
-DATE=$(date +%Y-%m-%d)
-OUTPUT="$LIFEOS/proposals/$DATE-morning-brief.md"
-LOG="$HOME/.cache/lifeos-logs/morning-brief.log"
+LOG_DIR="$HOME/.cache/lifeos-logs"
+STAMP="$LOG_DIR/morning-brief.stamp"
+LOG="$LOG_DIR/morning-brief.log"
 
-mkdir -p "$(dirname "$LOG")" "$LIFEOS/proposals"
+mkdir -p "$LOG_DIR" "$LIFEOS/proposals"
+
+TARGET_HOUR=8
+TODAY=$(date +%Y-%m-%d)
+HOUR=$(date +%H | sed 's/^0//')
+LAST=$(cat "$STAMP" 2>/dev/null || echo "")
+
+[ "$LAST" = "$TODAY" ] && exit 0
+[ "$HOUR" -lt "$TARGET_HOUR" ] && exit 0
+
+DATE="$TODAY"
+OUTPUT="$LIFEOS/proposals/$DATE-morning-brief.md"
 
 cd "$LIFEOS"
 
@@ -54,4 +67,6 @@ Compose a concise morning brief in this format:
 Save the output to: $OUTPUT
 
 Be brief. The user reads this in 2 minutes. No filler.
-" > "$LOG" 2>&1
+" >> "$LOG" 2>&1
+
+echo "$TODAY" > "$STAMP"
