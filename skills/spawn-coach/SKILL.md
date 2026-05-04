@@ -140,7 +140,137 @@ Round structure example (cooking):
 - "When do you want to chat with the coach? Pre-cook brief / post-cook log / mid-cook help / weekly planning?"
 - "Voice on phone or text?"
 
-Adapt rounds to domain. For pole the rounds are different (move inventory, body history, asymmetries, training cadence, session rhythm).
+Domain-specific rounds below. Use the most relevant domain as the starting point, then adapt.
+
+---
+
+**Pole / Aerial**
+
+*Round 1 — current state*
+- "Where are you in aerial? Beginner / intermediate / advanced? Months or years in?"
+- "What apparatus? Pole static / spin / lyra / silks / something else?"
+- "Specific moves you're working now, and what's next?"
+
+*Round 2 — body*
+- "Any injuries — healed, active, or chronic? Anything that limits training?"
+- "Asymmetries: stronger side, weaker grip, hip that doesn't open as much?"
+- "Fear or avoidance list — moves you're not ready to try or have stalled on?"
+
+*Round 3 — training setup*
+- "How often do you train? Studio vs home rig?"
+- "Do you have a teacher or class structure, or are you self-directed?"
+- "How do you currently log training? (Most people say 'I don't') "
+
+*Round 4 — goals*
+- "6-month goal: specific move, routine, strength benchmark?"
+- "Performance or competition aspirations? Or purely personal?"
+
+*Round 5 — interaction style*
+- "When do you want to use this coach? Post-training log / pre-class brief / injury check-in / program planning?"
+
+---
+
+**Fitness**
+
+*Round 1 — current state*
+- "What are you training now? Lifting, running, mobility, sport-specific, general fitness?"
+- "Experience level: years lifting, any prior programs, how consistent?"
+- "What does a normal training week look like?"
+
+*Round 2 — equipment + access*
+- "Home gym, commercial gym, or both?"
+- "Key equipment available (rack, cables, machines, barbells)?"
+- "Any equipment you lack that limits you?"
+
+*Round 3 — body + injury*
+- "Past injuries — healed but worth knowing about. Anything active?"
+- "Recovery patterns: sleep quality, how you typically feel 48h after a hard session?"
+- "Any movement restrictions (can't squat deep, shoulder impingement, etc.)?"
+
+*Round 4 — goals*
+- "Primary goal: strength, hypertrophy, body composition, longevity, sport?"
+- "6-month concrete target: specific lift numbers, body weight, performance test?"
+- "What's blocked you from hitting this before?"
+
+*Round 5 — interaction style*
+- "Pre-session brief / post-session log / weekly planning / injury check-in?"
+
+---
+
+**Thinking**
+
+*Round 1 — decision landscape*
+- "What kinds of decisions do you most want to get better at? (Career, investing, interpersonal, product/strategy, day-to-day?)"
+- "How frequently are you facing hard decisions — ongoing or currently facing a specific one?"
+
+*Round 2 — current system*
+- "How do you currently think through decisions? Journal, spreadsheet, whiteboard, just in your head?"
+- "Do you track past decisions and outcomes? Or do you lose visibility once a decision is made?"
+
+*Round 3 — recent cases*
+- "Tell me about a decision you got right and one you regret. What made the difference?"
+- "What's your most common failure mode — going too fast, overthinking, missing key info, listening to the wrong people?"
+
+*Round 4 — mental models*
+- "Any frameworks you already use — inversion, base rates, pre-mortem, something else?"
+- "What mental model do you want to get better at?"
+
+*Round 5 — interaction style*
+- "Do you want to talk through decisions in real time, or debrief after you've made them?"
+- "How much do you want the coach to push back vs. help you sharpen your own thinking?"
+
+---
+
+**Speaking**
+
+*Round 1 — current state*
+- "What context do you speak in? Internal (team, company), external (conference, client), academic, sales, something else?"
+- "Frequency: how many talks or presentations in the last 6 months?"
+- "What's your baseline — anxious / comfortable / depends on audience?"
+
+*Round 2 — failure modes*
+- "Specific recurring problem you want to fix. Rushing, filler words, losing the thread, energy, structure, nerves?"
+- "What feedback have you gotten — from audiences, managers, coaches?"
+
+*Round 3 — upcoming talks*
+- "Anything coming up in the next 2 months? Topic, audience size, stakes?"
+- "Do you script, outline, or speak from memory?"
+
+*Round 4 — goals*
+- "6-month target: specific talk type, specific audience, or a behavior you want eliminated?"
+- "What would a 'good talk' feel like for you — internal feeling vs. external response?"
+
+*Round 5 — interaction style*
+- "Pre-talk prep / post-talk debrief / watching recordings together / workshop mode?"
+
+---
+
+**Writing**
+
+*Round 1 — what you write*
+- "Form: essays, fiction, poetry, non-fiction, hybrid, something else?"
+- "Who are you writing for? Yourself, literary readers, professional context, no audience yet?"
+- "Frequency: do you write regularly or in bursts?"
+
+*Round 2 — history*
+- "Years of writing and rough volume. Anything published, shared, or submitted?"
+- "The piece you've abandoned most often — what's the pattern?"
+- "A piece you're proud of — what worked in it?"
+
+*Round 3 — current work*
+- "What are you working on now? What's stuck?"
+- "Where do you get stuck most: starting, developing, finishing, revising?"
+
+*Round 4 — voice and feedback*
+- "How do you take external feedback — receptive, defensive, or depends on the source?"
+- "Publication goal active, building toward, or writing for self?"
+
+*Round 5 — interaction style*
+- "Mid-draft help / revision feedback / reading and reacting to actual prose / weekly check-in?"
+
+---
+
+Adapt any of the above to the specific user. Skip or reorder rounds if the user gives rich answers that cover multiple rounds at once. Mark anything not covered as an "open gap" in profile.md.
 
 ## Don't
 
