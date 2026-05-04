@@ -62,9 +62,9 @@ Tasks for autonomous improvement of LifeOS framework. Ralph picks one per loop, 
 
 ## Low Priority — community / contribution
 
-- [ ] Add `CODE_OF_CONDUCT.md`
-- [ ] Add issue templates in `.github/ISSUE_TEMPLATE/` (new-coach-domain.md, new-skill.md, bug-report.md)
-- [ ] Add PR template in `.github/PULL_REQUEST_TEMPLATE.md`
+- [x] Add `CODE_OF_CONDUCT.md`
+- [x] Add issue templates in `.github/ISSUE_TEMPLATE/` (new-coach-domain.md, new-skill.md, bug-report.md)
+- [x] Add PR template in `.github/PULL_REQUEST_TEMPLATE.md`
 
 ## Completed
 
