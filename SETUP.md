@@ -124,21 +124,139 @@ For visual editing and graph view:
    - **Templater** (file templates)
    - **Dataview** (queries across notes)
 
-## Common setup issues
+## Troubleshooting
 
-### "permission denied" when running scripts
+### bootstrap.sh
+
+**"permission denied" when running bootstrap.sh**
 ```bash
 chmod +x ~/workspace/LifeOS/scripts/bootstrap.sh
 ```
 
-### Shell aliases not loading
-Make sure your shell config sources your aliases. Check `~/.zshrc` (or `~/.bashrc` for bash) for the aliases block. Open a new terminal tab to reload.
+**bootstrap.sh ran but nothing seems to have happened**
+Check if it exited early. Run it again — it's idempotent. Look for error output. If the vault directory already exists it will skip creating it, which is correct.
 
-### Drive connector says "insufficient scopes"
-Re-run `/mcp`, complete consent. If still failing, manage permissions at https://myaccount.google.com/permissions and re-add the connector.
+**bootstrap.sh created files in the wrong place**
+The script uses `$VAULT` if set, or defaults to `~/Documents/Vault`. If you wanted a different location, set `VAULT` before running:
+```bash
+export VAULT="$HOME/Library/CloudStorage/GoogleDrive-you@gmail.com/My Drive/Vault"
+~/workspace/LifeOS/scripts/bootstrap.sh
+```
+Then make sure `$VAULT` is set the same way in `~/.zshrc` so aliases work in future sessions.
 
-### Phone Claude doesn't read snapshot
-Check the Claude.ai project's system prompt has the correct Drive folder ID. Find your folder ID in `~/Documents/Vault/.claude/drive-config.json` after running `spawn-coach`.
+---
+
+### Shell aliases
+
+**`brain`, `cook`, `pole` — command not found**
+
+Two likely causes:
+
+1. You're in the same terminal session where you ran bootstrap. Shell config is only reloaded when you open a new tab or run `source ~/.zshrc`. Open a new tab and try again.
+
+2. bootstrap.sh wrote to `~/.zshrc` but you're using bash. Check which shell is your default:
+   ```bash
+   echo $SHELL
+   ```
+   If it's `/bin/bash`, copy the aliases block from `~/.zshrc` into `~/.bashrc` (or `~/.bash_profile` on older macOS).
+
+**Alias is there but opens Claude in the wrong directory**
+Each alias is `cd $VAULT && claude`. If `$VAULT` isn't set (e.g., it's not in `~/.zshrc`), this silently opens Claude in `~` instead. Check:
+```bash
+echo $VAULT
+```
+If empty, add `export VAULT="<your vault path>"` to `~/.zshrc` and reload.
+
+---
+
+### Google Drive connector
+
+**"insufficient scopes" or "unauthorized" error in Claude**
+The connector was granted read-only permissions during the OAuth flow. Re-run `/mcp` in a Claude Code session, remove the existing Drive connector, and re-add it — on the consent screen, make sure to grant edit/write access, not just view.
+
+If still failing after re-auth:
+1. Go to https://myaccount.google.com/permissions
+2. Find "Claude.ai" and revoke it
+3. Re-run `/mcp` and complete a fresh OAuth flow
+
+**Connector authenticated but Claude can't find a specific file**
+Drive connector searches your My Drive. If your vault is in a Shared Drive (not My Drive), the connector may not see it. Move the vault folder to My Drive, or check whether your connector version supports Shared Drives.
+
+**Connector works on Mac but phone Claude can't read Drive files**
+Phone Claude.ai uses a separate OAuth grant. In the Claude.ai mobile app: Settings → Integrations → verify Google Drive is connected. If it shows connected but files aren't loading, disconnect and reconnect.
+
+---
+
+### Google Drive Desktop
+
+**Can't find the Drive Desktop mount point**
+```bash
+ls ~/Library/CloudStorage/
+```
+The folder is named `GoogleDrive-<your-email>`. If this directory doesn't exist, Drive Desktop isn't running — check the menu bar icon or relaunch it from Applications.
+
+**Chose "Stream" mode instead of "Mirror" — how to fix**
+Stream mode keeps files in the cloud by default; Mirror mode syncs a full local copy. LifeOS needs local files because Claude Code reads from the filesystem.
+
+To switch: Google Drive menu bar icon → Preferences → Google Drive tab → switch to "Mirror files". Wait for the initial re-sync (can take several minutes for large drives).
+
+**Vault moved to Drive but `$VAULT` still points to old location**
+Edit `~/.zshrc`:
+```bash
+# Change this:
+export VAULT="$HOME/Documents/Vault"
+# To this (adjust email and path):
+export VAULT="$HOME/Library/CloudStorage/GoogleDrive-you@gmail.com/My Drive/Vault"
+```
+Then reload: `source ~/.zshrc`. Verify with `echo $VAULT`.
+
+**Drive Desktop not starting on login**
+System Settings → General → Login Items → add Google Drive to the list.
+
+---
+
+### spawn-coach
+
+**"drive-config.json not found" or Drive-related error during spawn**
+The `spawn-coach` skill writes to Drive during setup. Make sure you've completed Step 3 (Drive connector auth via `/mcp`) before spawning. Run `/mcp` in the `brain` session if you haven't.
+
+**spawn-coach ran but no new alias was added**
+Open a new terminal tab to reload `~/.zshrc`. If the alias still isn't there, check whether `spawn-coach` completed successfully — it should have printed a system prompt for your phone project. If it exited early, re-run `brain` and say "spawn a [domain] coach" again; the skill is designed to be re-runnable.
+
+**Want to re-spawn a coach (replace existing)**
+Say `spawn a cooking coach` again. The skill will ask whether to overwrite existing files. Say yes. Profile.md will be preserved unless you explicitly tell it to reset.
+
+---
+
+### Phone / Claude.ai
+
+**Phone Claude references wrong or stale info**
+The phone project reads from a snapshot file in your Drive. If the snapshot hasn't been pushed recently, phone Claude is working from old data. On your Mac, type the coach alias and say "push a snapshot" or invoke the `vault-push-snapshot` skill.
+
+**System prompt in phone project has placeholder file IDs like `<FOLDER_ID>`**
+The `spawn-coach` skill outputs a system prompt with your real Drive folder IDs substituted in. If you see angle-bracket placeholders, the skill may not have completed the Drive upload step. Re-run `spawn-coach` from `brain`. Check `~/.claude/drive-config.json` for the real IDs.
+
+**Phone writes an inbox note but Mac doesn't pick it up**
+The inbox file lives at `Vault/Coaches/GetBetterAt<Name>/inbox/` in Drive. On Mac, `vault-pull-inbox` downloads it. This only runs when you open a coach session — it's not a background daemon. Next time you type the coach alias, the inbox will be pulled automatically.
+
+If Drive Desktop is installed and syncing, the file should appear in your local vault too — check `$VAULT/Coaches/GetBetterAt<Name>/inbox/`.
+
+**Phone Claude ignores the system prompt or acts generic**
+Claude.ai projects have a character limit on the system prompt (~10K characters). If `spawn-coach` generated a very long prompt, it may be truncated. Trim the "Reading protocol" section to just the key file paths, and keep the Persona + Voice sections. The snapshot file carries the detailed context.
+
+---
+
+### vault-pull-inbox / sync
+
+**"no inbox files found" — pull always empty**
+Either no inbox files have been written from phone yet (expected if you haven't used the phone project), or the Drive folder ID in `drive-config.json` is wrong. Check:
+```bash
+cat $VAULT/.claude/drive-config.json
+```
+The `inbox_folder_id` field should match the `inbox/` folder inside your coach's Drive folder. If it's wrong, run `spawn-coach` again or update the file manually with the correct ID from Drive.
+
+**Inbox file downloaded but content looks garbled or has extra backslashes**
+Phone keyboards sometimes auto-escape markdown characters (asterisks, brackets). The `vault-pull-inbox` skill is designed to handle this — it strips common escaping artifacts before integrating. If a specific file is problematic, open it in the vault and clean it manually, then re-run the pull.
 
 ---
 
